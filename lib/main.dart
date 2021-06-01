@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yangocanteen/global/Global.dart';
 
 void main() {
   runApp(MyApp());
@@ -57,6 +58,16 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  void loadData() async {
+    await Global.getInstance().dio.get('favorite/get');
   }
 
   @override
