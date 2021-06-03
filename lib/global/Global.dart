@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class Global {
-  static late Global _instance;
+  static late Global _instance = new Global();
   late Dio dio;
 
   //构造方法
