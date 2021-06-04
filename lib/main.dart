@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yangocanteen/routes/routes.dart';
 
-
 void main() {
   runApp(MyApp());
 }

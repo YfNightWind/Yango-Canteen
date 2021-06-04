@@ -13,17 +13,16 @@ class Global {
     dio = new Dio();
     dio.options = BaseOptions(
       baseUrl: 'http://123.56.192.77:5050/',
+      connectTimeout: 100000,
+      receiveTimeout: 100000,
+      sendTimeout: 100000,
       contentType: Headers.jsonContentType,
       responseType: ResponseType.json,
     );
     //dio的监听事件
     dio.interceptors.add(InterceptorsWrapper(
-        //   onRequest: (options, headers) {
-        //   print("请求" + options.extra.toString());
-        // }, onResponse: (e, headers) {
-        //   print("返回" + e.toString());
-        // },
-        onError: (e, headers) {
+      //"n" means nothing
+      onError: (DioError e, n) {
       if (e.type == DioErrorType.connectTimeout) {
         print("连接超时");
       } else {
