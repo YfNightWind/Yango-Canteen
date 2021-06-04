@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 
 class Global {
+  static Global? _instance;
   late Dio dio;
   //构造方法
-  static Global getInstance() {
-    Global _instance = new Global();
+  static Global? getInstance() {
+    if (_instance == null) _instance = new Global();
     return _instance;
   }
-
   //这样子构造避免每一次请求都new一个dio，省内存
   Global() {
     dio = new Dio();
