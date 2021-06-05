@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:yangocanteen/view/BottomBar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
@@ -16,7 +15,6 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('首页'),
       ),
-      body: TabsPage(),
     );
   }
 }
