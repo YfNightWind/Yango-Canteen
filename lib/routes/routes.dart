@@ -6,5 +6,4 @@ import 'package:yangocanteen/view/account.dart';
 Map<String, WidgetBuilder> routes = {
   "/":(BuildContext context)=> TabsPage(),
   "/account":(BuildContext context)=> AccountPage(),
-  
 };
