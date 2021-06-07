@@ -19,32 +19,63 @@ class _CategoryPageState extends State<CategoryPage> {
             padding: EdgeInsets.only(top: 45),
             child: Text(
               '分类',
-              style: TextStyle(fontSize: 40,),
+              style: TextStyle(
+                fontSize: 40,
+              ),
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 120,
           ),
-          Card(
-            child: Container(
-              height: 180,
-              width: 350,
+          Padding(
+            padding: EdgeInsets.only(top: 10),
+          ),
+          GestureDetector(
+            onTap: () {
+              print("具体页面1");
+            },
+            child: Card(
+              child: Container(
+                alignment: Alignment.center,
+                height: 100,
+                width: 350,
+                margin: EdgeInsets.all(10),
+                child: Text(
+                  '按菜品查找',
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
+                ),
+              ),
               color: Colors.orange,
-              margin: EdgeInsets.all(10),
+              elevation: 10,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
             ),
-            elevation: 10,
           ),
           SizedBox(
             height: 30,
           ),
-          Card(
-            child: Container(
-              height: 180,
-              width: 350,
+          GestureDetector(
+            onTap: () {
+              print("具体页面2");
+            },
+            child: Card(
+              child: Container(
+                alignment: Alignment.center,
+                height: 100,
+                width: 350,
+                margin: EdgeInsets.all(10),
+                child: Text(
+                  '按楼层查找',
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
+                ),
+              ),
               color: Colors.blue,
-              margin: EdgeInsets.all(10),
+              elevation: 10,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
             ),
-            elevation: 10,
           ),
         ],
       ),
