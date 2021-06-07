@@ -13,9 +13,17 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: EdgeInsets.only(top: 45),
+            child: Text(
+              '分类',
+              style: TextStyle(fontSize: 40,),
+            ),
+          ),
           SizedBox(
-            height: 100,
+            height: 20,
           ),
           Card(
             child: Container(
@@ -24,6 +32,7 @@ class _CategoryPageState extends State<CategoryPage> {
               color: Colors.orange,
               margin: EdgeInsets.all(10),
             ),
+            elevation: 10,
           ),
           SizedBox(
             height: 30,
@@ -35,6 +44,7 @@ class _CategoryPageState extends State<CategoryPage> {
               color: Colors.blue,
               margin: EdgeInsets.all(10),
             ),
+            elevation: 10,
           ),
         ],
       ),
