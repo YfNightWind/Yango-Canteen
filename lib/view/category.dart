@@ -44,6 +44,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   '按菜品查找',
                   style: TextStyle(
                     fontSize: 40,
+                    color: Colors.white
                   ),
                 ),
               ),
@@ -69,6 +70,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   '按楼层查找',
                   style: TextStyle(
                     fontSize: 40,
+                    color: Colors.white
                   ),
                 ),
               ),

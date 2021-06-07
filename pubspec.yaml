@@ -35,6 +35,8 @@ dependencies:
   provider: ^5.0.0
   # BottomBar中间的按钮
   flutter_speed_dial: ^3.0.5
+  #轮播图
+  flutter_card_swipper: ^0.4.0
 
 dev_dependencies:
   flutter_test:
