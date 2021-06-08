@@ -84,7 +84,7 @@ class FeedBackFormState extends State<FeedBackForm> {
           //按钮
           Container(
               alignment: Alignment.bottomRight,
-              //这里必须要写Builder，原因如下（来着《Flutter实战》P121）：👇
+              //这里必须要写Builder，原因如下（来自《Flutter实战》P121）：👇
               /*登录按钮的onPressed方法中不能通过Form.of(context)来获取，原因是，
               此处的context为FormTestRoute的context，而Form.of(context)是根据所指定context向根去查找，
               而FormState是在FormTestRoute的子树中，所以不行。正确的做法是通过Builder来构建登录按钮，
