@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Swiper(itemCount: 3)
+          // Swiper(itemCount: 3)
         ],
       ),
     );
