@@ -12,7 +12,7 @@ class Global {
   Global() {
     dio = new Dio();
     dio.options = BaseOptions(
-      baseUrl: 'http://接口保护起来/',
+      baseUrl: 'http://123.56.192.77:5050/',
       connectTimeout: 100000,
       receiveTimeout: 100000,
       sendTimeout: 100000,
