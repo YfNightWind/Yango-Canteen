@@ -1,16 +1,20 @@
 # 阳光学院校园食堂app
 
-刚刚起步，还未完善
+和舍友一起合作开发的一款应用
+使用纯Flutter开发，后端使用node.js开发，同时也有微信小程序端，目前也正在开发中
 
-## Getting Started
+### 主要功能如下
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [ ] 登录
+- [ ] 注册
+- [ ] 首页
+    - [ ]轮播图
+    - [ ]当前最受欢迎的店铺
+- [ ] 分类页面
+- [ ]个人界面
+    - [ ]个人中心
+        - [ ]可修改用户名
+        - [ ]可修改头像
+    - [ ]反馈页面
+- [ ]按楼层查询
+- [ ]按菜品查询    
