@@ -46,7 +46,7 @@ class _AccountPageState extends State<AccountPage> {
                       style: TextStyle(fontSize: 30, height: 1.8),
                     ),
                     minVerticalPadding: -10,
-                    subtitle: Text('这是一个测试', style: TextStyle(fontSize: 16, height: 1.5)),
+                    subtitle: Text('这是一个测试!', style: TextStyle(fontSize: 16, height: 1.5)),
                   ),
                 ),
               ),
