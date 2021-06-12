@@ -42,7 +42,7 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     contentPadding: EdgeInsets.only(left: 10, top: 30),
                     title: Text(
-                      'username',
+                      'usernamesssssss',
                       style: TextStyle(fontSize: 30, height: 1.8),
                     ),
                     minVerticalPadding: -10,

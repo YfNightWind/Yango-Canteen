@@ -110,7 +110,9 @@ class _LoginPageState extends State<LoginPage> {
                     '注册',
                     style: TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/register');
+                  },
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20))),
