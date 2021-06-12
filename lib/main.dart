@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:yangocanteen/routes/routes.dart';
 import 'package:yangocanteen/viewmodel/login_viewmodel.dart';
 
+final GlobalKey<NavigatorState>? navigatorKey = new GlobalKey<NavigatorState>();
 void main() {
   runApp(MultiProvider(
     //有用到providers的都需要这么写
