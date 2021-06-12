@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
+                          borderRadius: BorderRadius.circular(17))),
                       elevation: MaterialStateProperty.all(10)),
                 ),
               ),
@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
+                          borderRadius: BorderRadius.circular(17))),
                       elevation: MaterialStateProperty.all(10)),
                 ),
               )
