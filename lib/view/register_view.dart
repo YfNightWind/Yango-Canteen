@@ -38,36 +38,63 @@ class _RegisterFormState extends State<RegisterForm> {
   final _passConfirm = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         Padding(
           padding: EdgeInsets.only(top: 30, left: 25, right: 25, bottom: 10),
-          child: TextField(
+          child: TextFormField(
             decoration: InputDecoration(
                 labelText: '用户名',
                 hintText: '用户名不能超过15个字符哦',
                 prefixIcon: Icon(Icons.person_add_alt_1)),
-                controller: _user,
+            controller: _user,
+            obscureText: false,
+            validator: (userValue) {
+              if (userValue == null || userValue.isEmpty) {
+                return '用户名不可以为空哦';
+              }
+              if (userValue.length > 15) {
+                return '用户名超过15个字符了！';
+              }
+              return null;
+            },
           ),
         ),
         Padding(
           padding: EdgeInsets.only(top: 10, left: 25, right: 25, bottom: 10),
-          child: TextField(
+          child: TextFormField(
             decoration: InputDecoration(
                 labelText: '密码',
                 hintText: '密码位数在5~20之间哦',
                 prefixIcon: Icon(Icons.lock_open)),
-                controller: _pass,
+            controller: _pass,
+            obscureText: true,
+            validator: (passValue) {
+              if (passValue == null || passValue.isEmpty) {
+                return '密码不得为空哦';
+              }
+              if (5 < passValue.length || passValue.length > 15) {
+                return '密码在5~20位哦';
+              }
+              return null;
+            },
           ),
         ),
         Padding(
           padding: EdgeInsets.only(top: 10, left: 25, right: 25, bottom: 10),
-          child: TextField(
+          child: TextFormField(
             decoration: InputDecoration(
                 labelText: '确认密码',
                 hintText: '确认您的密码！',
                 prefixIcon: Icon(Icons.lock_outline)),
-                controller: _passConfirm,
+            controller: _passConfirm,
+            obscureText: true,
+            validator: (confValue) {
+              if (confValue != _pass.text) {
+                return '两次密码输入不一致';
+              }
+              return null;
+            },
           ),
         ),
         Padding(
@@ -124,7 +151,10 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 
-  void _submit(){
-
+  void _submit() {
+    if (Form.of(context)!.validate()) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('发送成功，感谢您的支持！')));
+    }
   }
 }

@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 30,
               ),
-              TextField(
+              TextFormField(
                 decoration: InputDecoration(
                   labelText: '账号',
                   hintText: '请输入用户名',
