@@ -33,6 +33,9 @@ enum ChosingCharacter { student, manger }
 
 class _RegisterFormState extends State<RegisterForm> {
   ChosingCharacter _character = ChosingCharacter.student;
+  final _user = new TextEditingController();
+  final _pass = new TextEditingController();
+  final _passConfirm = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,6 +47,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 labelText: '用户名',
                 hintText: '用户名不能超过15个字符哦',
                 prefixIcon: Icon(Icons.person_add_alt_1)),
+                controller: _user,
           ),
         ),
         Padding(
@@ -53,6 +57,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 labelText: '密码',
                 hintText: '密码位数在5~20之间哦',
                 prefixIcon: Icon(Icons.lock_open)),
+                controller: _pass,
           ),
         ),
         Padding(
@@ -62,6 +67,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 labelText: '确认密码',
                 hintText: '确认您的密码！',
                 prefixIcon: Icon(Icons.lock_outline)),
+                controller: _passConfirm,
           ),
         ),
         Padding(
@@ -102,17 +108,23 @@ class _RegisterFormState extends State<RegisterForm> {
               child: ElevatedButton(
                 child: Text(
                   '成为我们的朋友！',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(17))),
                     elevation: MaterialStateProperty.all(10)),
-                onPressed: () {},
+                onPressed: () {
+                  _submit();
+                },
               ),
             ))
       ],
     );
+  }
+
+  void _submit(){
+
   }
 }

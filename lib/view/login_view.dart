@@ -13,8 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _user = new TextEditingController();
-  TextEditingController _password = new TextEditingController();
+  final _user = new TextEditingController();
+  final _password = new TextEditingController();
 
   @override
   void dispose() {
