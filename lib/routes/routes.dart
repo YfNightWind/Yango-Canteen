@@ -7,7 +7,7 @@ import 'package:yangocanteen/view/login_view.dart';
 import 'package:yangocanteen/view/register_view.dart';
 
 Map<String, WidgetBuilder> routes = {
-  "/": (BuildContext context) => RegisterPage(),
+  "/": (BuildContext context) => LoginPage(),
   "/account": (BuildContext context) => AccountPage(),
   "/feedback": (BuildContext context) => FeedBackPage(),
   "/home": (BuildContext context) => TabsPage(),

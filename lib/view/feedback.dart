@@ -83,35 +83,39 @@ class FeedBackFormState extends State<FeedBackForm> {
           ),
           //按钮
           Container(
-              alignment: Alignment.bottomRight,
-              //这里必须要写Builder，原因如下（来自《Flutter实战》P121）：👇
-              /*登录按钮的onPressed方法中不能通过Form.of(context)来获取，原因是，
+            alignment: Alignment.bottomRight,
+            //这里必须要写Builder，原因如下（来自《Flutter实战》P121）：👇
+            /*登录按钮的onPressed方法中不能通过Form.of(context)来获取，原因是，
               此处的context为FormTestRoute的context，而Form.of(context)是根据所指定context向根去查找，
               而FormState是在FormTestRoute的子树中，所以不行。正确的做法是通过Builder来构建登录按钮，
               Builder会将widget节点的context作为回调参数
                */
-              child: Builder(builder: (context) {
+            child: Builder(
+              builder: (context) {
                 return ElevatedButton.icon(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                    ),
-                    onPressed: () {
-                      //如果表单有效，Validate 返回 true，否则返回 false。
-                      if (Form.of(context)!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('发送成功，感谢您的支持！')));
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
+                  ),
+                  onPressed: () {
+                    //如果表单有效，Validate 返回 true，否则返回 false。
+                    if (Form.of(context)!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('发送成功，感谢您的支持！')));
 
-                        sendInfo();
-                        _focusNode1.unfocus();
-                        _focusNode2.unfocus();
-                        contact.clear();
-                        details.clear();
-                      }
-                    },
-                    icon: Icon(Icons.send),
-                    label: Text('发送'));
-              }))
+                      sendInfo();
+                      _focusNode1.unfocus();
+                      _focusNode2.unfocus();
+                      contact.clear();
+                      details.clear();
+                    }
+                  },
+                  icon: Icon(Icons.send),
+                  label: Text('发送'),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
