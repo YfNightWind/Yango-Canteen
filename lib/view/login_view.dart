@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
       // Navigator.pushNamed(context, '/home');
     });
   }
-
+  //加载动画
   void _showLoadingAnimation() {
     showDialog(
         context: context,

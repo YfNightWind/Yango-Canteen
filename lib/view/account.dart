@@ -31,7 +31,8 @@ class _AccountPageState extends State<AccountPage> {
               onTap: () => print("跳转到用户个人自定义，这个功能有待完成"),
               child: Card(
                 elevation: 10,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
                 margin: EdgeInsets.all(20),
                 child: Container(
                   width: 400,
@@ -42,13 +43,42 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     contentPadding: EdgeInsets.only(left: 10, top: 30),
                     title: Text(
-                      'usernamesssssss',
+                      '用户名长度测试',
                       style: TextStyle(fontSize: 30, height: 1.8),
                     ),
                     minVerticalPadding: -10,
-                    subtitle: Text('这是一个测试!', style: TextStyle(fontSize: 16, height: 1.5)),
+                    subtitle: Text(
+                      '这是一个测试!',
+                      style: TextStyle(fontSize: 16, height: 1.5),
+                    ),
                   ),
                 ),
+              ),
+            ),
+            Padding(
+              padding:
+                  EdgeInsets.only(top: 20, bottom: 5, left: 20, right: 10),
+              child: ListTile(
+                leading: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                  size: 30,
+                ),
+                title: Text('我的喜欢', style: TextStyle(fontSize: 20)),
+                onTap: (){},
+              ),
+            ),
+            Padding(
+              padding:
+                  EdgeInsets.only(top: 5, bottom: 10, left: 20, right: 10),
+              child: ListTile(
+                leading: Icon(
+                  Icons.comment,
+                  color: Colors.blue.shade700,
+                  size: 30,
+                ),
+                title: Text('我的评论', style: TextStyle(fontSize: 20)),
+                onTap: (){},
               ),
             ),
           ],
