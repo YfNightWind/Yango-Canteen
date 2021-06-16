@@ -106,25 +106,41 @@ class AndroidView extends StatelessWidget {
   }
 }
 
-class IosView extends StatelessWidget {
-  final List restaurantInfo = jsonDecode(getRestaurant().toString())["result"];
+class IosView extends StatefulWidget {
+  const IosView({Key? key}) : super(key: key);
 
-  static getRestaurant() async {
+  @override
+  _IosViewState createState() => _IosViewState();
+}
+
+class _IosViewState extends State<IosView> {
+  var restaurantInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    getRestaurant();
+  }
+
+  void getRestaurant() async {
     var result = await Global.getInstance()!.dio.post('/restaurant/get', data: {
       "floor": 7,
     });
-    print(result.runtimeType.toString()) ;
+    print(restaurantInfo);
+    setState(() {
+      restaurantInfo = jsonDecode(result.toString())["result"];
+    });
+    List? list = restaurantInfo;
+    print(list.runtimeType.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-          child: Text('333'),
-          onPressed: () {
-            getRestaurant();
-          }),
-    );
+    return ElevatedButton(
+        onPressed: () {
+          getRestaurant();
+        },
+        child: Text('111'));
   }
 }
 
