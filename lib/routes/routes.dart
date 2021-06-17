@@ -6,7 +6,6 @@ import 'package:yangocanteen/view/account.dart';
 import 'package:yangocanteen/view/feedback.dart';
 import 'package:yangocanteen/view/login_view.dart';
 import 'package:yangocanteen/view/register_view.dart';
-import 'package:yangocanteen/view/test.dart';
 
 Map<String, WidgetBuilder> routes = {
   "/": (BuildContext context) => ShowMenuPage(),
@@ -14,4 +13,5 @@ Map<String, WidgetBuilder> routes = {
   "/feedback": (BuildContext context) => FeedBackPage(),
   "/home": (BuildContext context) => TabsPage(),
   "/register": (BuildContext context) => RegisterPage(),
+  "/menu": (BuildContext context) => ShowMenuPage()
 };

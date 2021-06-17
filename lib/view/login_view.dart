@@ -90,7 +90,6 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
-                    _showLoadingAnimation();
                     _login();
                   },
                   style: ButtonStyle(
@@ -128,10 +127,11 @@ class _LoginPageState extends State<LoginPage> {
 
   void _login() {
     context.read<LoginViewModel>().setIsLogin(true);
-    new Timer(Duration(seconds: 3), () {
-      // Navigator.pushNamed(context, '/home');
-    });
+    if (Provider.of<LoginViewModel>(context,listen: false).getIsLogin) {
+      _showLoadingAnimation();
+    }
   }
+
   //加载动画
   void _showLoadingAnimation() {
     showDialog(

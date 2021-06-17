@@ -39,7 +39,9 @@ dependencies:
   flutter_card_swipper: ^0.4.0
   #加载动画
   loading_indicator: ^2.1.1
-
+  #本地数据库存储
+  sqflite: ^2.0.0+3
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

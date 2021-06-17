@@ -42,15 +42,13 @@ class _CategoryPageState extends State<CategoryPage> {
                 margin: EdgeInsets.all(10),
                 child: Text(
                   '按菜品查找',
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.white
-                  ),
+                  style: TextStyle(fontSize: 40, color: Colors.white),
                 ),
               ),
               color: Colors.orange,
               elevation: 10,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
             ),
           ),
           SizedBox(
@@ -58,7 +56,7 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
           GestureDetector(
             onTap: () {
-              print("具体页面2");
+              Navigator.pushNamed(context, '/menu');
             },
             child: Card(
               child: Container(
@@ -68,15 +66,13 @@ class _CategoryPageState extends State<CategoryPage> {
                 margin: EdgeInsets.all(10),
                 child: Text(
                   '按楼层查找',
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.white
-                  ),
+                  style: TextStyle(fontSize: 40, color: Colors.white),
                 ),
               ),
               color: Colors.blue,
               elevation: 10,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
             ),
           ),
         ],
