@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:yangocanteen/view/floors/floor2.dart';
 import 'package:yangocanteen/view/floors/floor3.dart';
+import 'package:yangocanteen/view/floors/floor4.dart';
+import 'package:yangocanteen/view/floors/floor5.dart';
+import 'package:yangocanteen/view/floors/floor6.dart';
 import 'package:yangocanteen/view/floors/floor7.dart';
 
 class ShowMenuPage extends StatefulWidget {
@@ -14,9 +17,12 @@ class _ShowMenuPageState extends State<ShowMenuPage>
   List<Widget> widgets = [
     FloorTwo(),
     FloorThree(),
+    FloorFour(),
+    FloorFive(),
+    FloorSix(),
     FloorSeven(),
   ];
-  List tabs = ['2楼', '3楼', '7楼'];
+  List tabs = ['2楼', '3楼', '4楼','5楼','6楼','7楼'];
   int _index = 0;
   late TabController _controller;
   @override

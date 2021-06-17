@@ -4,7 +4,6 @@ import 'package:yangocanteen/view/BottomBar.dart';
 import 'package:yangocanteen/view/ShowMenu.dart';
 import 'package:yangocanteen/view/account.dart';
 import 'package:yangocanteen/view/feedback.dart';
-import 'package:yangocanteen/view/login_view.dart';
 import 'package:yangocanteen/view/register_view.dart';
 
 Map<String, WidgetBuilder> routes = {

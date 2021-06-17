@@ -32,17 +32,40 @@ class _FloorSevenState extends State<FloorSeven> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: showRestaurant!.length > 0
-          ? ListView.builder(
-              itemCount: showRestaurant!.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(showRestaurant![index]["name"]),
-                  onTap: () {},
-                );
-              },
-            )
-          : Text(""), //xx?xx:xx
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Container(
+                  width: 120,
+                  height: 690,
+                  child: ListView.separated(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: showRestaurant!.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(showRestaurant![index]["name"]),
+                        onTap: () {
+                          print(index);
+                        },
+                      );
+                    },
+                    separatorBuilder: (context, index) => Divider(
+                      color: Colors.black,
+                      height: 1.5,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
