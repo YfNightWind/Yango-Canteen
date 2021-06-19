@@ -22,7 +22,7 @@ class _ShowMenuPageState extends State<ShowMenuPage>
     FloorSix(),
     FloorSeven(),
   ];
-  List tabs = ['2楼', '3楼', '4楼','5楼','6楼','7楼'];
+  List tabs = ['2楼', '3楼', '4楼', '5楼', '6楼', '7楼'];
   int _index = 0;
   late TabController _controller;
   @override
@@ -53,11 +53,20 @@ class _ShowMenuPageState extends State<ShowMenuPage>
           child: AppBar(
             elevation: 10,
             backgroundColor: Colors.white,
-            leading: Icon(
-              Icons.food_bank,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
               color: Colors.black,
-              size: 45,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
+            actions: [
+              Icon(
+                Icons.food_bank,
+                color: Colors.black,
+                size: 45,
+              ),
+            ],
             bottom: TabBar(
                 controller: _controller,
                 tabs: tabs.map((e) => Tab(text: e)).toList(),

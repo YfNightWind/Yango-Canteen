@@ -1,49 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swipper/flutter_card_swiper.dart';
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Flutter Demo',
+      theme: new ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => new _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final ValueNotifier<int> _counter = ValueNotifier<int>(0);
-  final Widget goodJob = const Text('Good job!');
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            ValueListenableBuilder<int>(
-              builder: (BuildContext context, int value, Widget? child) {
-                // This builder will only get called when the _counter
-                // is updated.
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Text('$value'),
-                    child!,
-                  ],
-                );
-              },
-              valueListenable: _counter,
-              // The child parameter is most helpful if the child is
-              // expensive to build and does not depend on the value from
-              // the notifier.
-              child: goodJob,
-            )
-          ],
-        ),
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Flutter Demo Home Page'),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.plus_one),
-        onPressed: () => _counter.value += 1,
+    body:  new Swiper(
+        itemBuilder: (BuildContext context,int index){
+          return new Image.network("http://via.placeholder.com/350x150",fit: BoxFit.fill,);
+        },
+        itemCount: 3,
+        pagination: new SwiperPagination(),
+        control: new SwiperControl(),
       ),
     );
   }

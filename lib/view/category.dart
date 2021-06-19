@@ -32,7 +32,8 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
           GestureDetector(
             onTap: () {
-              print("具体页面1");
+              ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('该功能暂未完成，敬请期待')));
             },
             child: Card(
               child: Container(
