@@ -8,21 +8,22 @@ class Global {
     if (_instance == null) _instance = new Global();
     return _instance;
   }
+
   //这样子构造避免每一次请求都new一个dio，省内存
   Global() {
     dio = new Dio();
     dio.options = BaseOptions(
       baseUrl: 'http://114.215.209.136:5050/',
-      connectTimeout: 100000,
-      receiveTimeout: 100000,
-      sendTimeout: 100000,
+      connectTimeout: 10000,
+      receiveTimeout: 10000,
+      sendTimeout: 10000,
       contentType: Headers.jsonContentType,
       responseType: ResponseType.json,
     );
     //dio的监听事件
     dio.interceptors.add(InterceptorsWrapper(
-      //"n" means nothing
-      onError: (DioError e, n) {
+        //"n" means nothing
+        onError: (DioError e, n) {
       if (e.type == DioErrorType.connectTimeout) {
         print("连接超时");
       } else {
