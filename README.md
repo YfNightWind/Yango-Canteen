@@ -4,6 +4,9 @@
 和舍友一起合作开发的一款应用
 使用纯Flutter开发，后端使用node.js开发，同时也有微信小程序端，目前也正在开发中
 
+#####APK下载地址
+[百度网盘链接](https://pan.baidu.com/s/1yoRds1hesrjKTApkBfyw9Q) 提取码：naj1 
+
 ## 主要功能如下
 
 - [ ] 登录
