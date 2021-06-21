@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:yangocanteen/global/Global.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     contentPadding: EdgeInsets.only(left: 10, top: 30),
                     title: Text(
-                      '用户名长度测试',
+                      Global.getInstance()!.user["username"],
                       style: TextStyle(fontSize: 30, height: 1.8),
                     ),
                     minVerticalPadding: -10,

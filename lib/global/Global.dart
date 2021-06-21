@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 class Global {
   static Global? _instance;
   late Dio dio;
+  late String token;
+  late Map user;
   //构造方法
   static Global? getInstance() {
     if (_instance == null) _instance = new Global();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yangocanteen/global/Global.dart';
 import 'package:yangocanteen/viewmodel/login_viewmodel.dart';
 
@@ -133,6 +134,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
     var result = await Global.getInstance()!.dio.post(
       '/user/login',
       data: {
@@ -142,6 +144,9 @@ class _LoginPageState extends State<LoginPage> {
     );
     print(result);
     if (result.data["code"]) {
+      Global.getInstance()!.token = result.data["token"];
+      Global.getInstance()!.user = result.data["result"][0];
+      sp.setString("token", result.data["token"]);
       Navigator.popAndPushNamed(context, '/home');
     } else {
       print("shit");
