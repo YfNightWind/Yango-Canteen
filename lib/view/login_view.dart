@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:yangocanteen/global/Global.dart';
 import 'package:yangocanteen/viewmodel/login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,14 +13,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _user = new TextEditingController();
-  final _password = new TextEditingController();
+  late TextEditingController _user;
+  late TextEditingController _password;
+
+  @override
+  void initState() {
+    _user = new TextEditingController();
+    _password = new TextEditingController();
+    super.initState();
+  }
 
   @override
   void dispose() {
-    _user.dispose();
-    _password.dispose();
     super.dispose();
+    context.read<LoginViewModel>().getUser!.dispose();
+    context.read<LoginViewModel>().getPass!.dispose();
   }
 
   @override
@@ -124,28 +132,38 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _login() {
-    context.read<LoginViewModel>().setIsLogin(true);
-    if (Provider.of<LoginViewModel>(context,listen: false).getIsLogin) {
-      _showLoadingAnimation();
+  void _login() async {
+    var result = await Global.getInstance()!.dio.post(
+      '/user/login',
+      data: {
+        "username": _user.text,
+        "password": _password.text,
+      },
+    );
+    print(result);
+    if (result.data["code"]) {
+      Navigator.popAndPushNamed(context, '/home');
+    } else {
+      print("shit");
     }
   }
 
   //加载动画
   void _showLoadingAnimation() {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return Dialog(
-            child: LoadingIndicator(
-              indicatorType: Indicator.pacman,
-              color: Colors.orange,
-            ),
-            backgroundColor: Colors.transparent,
-            insetPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-            elevation: 0,
-          );
-        });
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: LoadingIndicator(
+            indicatorType: Indicator.pacman,
+            color: Colors.orange,
+          ),
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          elevation: 0,
+        );
+      },
+    );
   }
 }

@@ -41,6 +41,10 @@ dependencies:
   loading_indicator: ^2.1.1
   #本地数据库存储
   sqflite: ^2.0.0+3
+  #临时数据存储
+  shared_preferences: ^2.0.6
+  #加载动画
+  flutter_easyloading: ^3.0.0
   
 dev_dependencies:
   flutter_test:

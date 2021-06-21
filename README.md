@@ -36,3 +36,4 @@
 - [ ] 每次切换Tab`Null check operator used on a null value`的问题
 - [ ] 解决接口请求的时候需有返回index，而不是string，这样子会导致未点击店名之前不会展示任何数据
 - [ ] 点击店名后希望有个选中的交互反馈
+- [ ] 适配UI
