@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yangocanteen/global/Global.dart';
-import 'package:yangocanteen/viewmodel/login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -21,14 +19,16 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     _user = new TextEditingController();
     _password = new TextEditingController();
+    verifyToken();
+    _login();
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
-    context.read<LoginViewModel>().getUser!.dispose();
-    context.read<LoginViewModel>().getPass!.dispose();
+    verifyToken();
+    _login();
   }
 
   @override
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _login() async {
+  Future _login() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     var result = await Global.getInstance()!.dio.post(
       '/user/login',
@@ -147,28 +147,53 @@ class _LoginPageState extends State<LoginPage> {
       Global.getInstance()!.token = result.data["token"];
       Global.getInstance()!.user = result.data["result"][0];
       sp.setString("token", result.data["token"]);
-      Navigator.popAndPushNamed(context, '/home');
+      sp.setString("user", result.data["result"][0]["username"]);
+      Navigator.pushNamed(context, '/home');
     } else {
       print("shit");
     }
   }
 
-  //加载动画
-  void _showLoadingAnimation() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Dialog(
-          child: LoadingIndicator(
-            indicatorType: Indicator.pacman,
-            color: Colors.orange,
-          ),
-          backgroundColor: Colors.transparent,
-          insetPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-          elevation: 0,
-        );
+  //验证token
+  Future verifyToken() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    String? token = sp.getString("token");
+    String? user = sp.getString("user");
+    if (token != null) {
+      Global.getInstance()!.token = token;
+    }
+    var getToken = await Global.getInstance()!.dio.post(
+      '/user/token',
+      data: {
+        "username": user,
+        "token": token,
       },
     );
+    if (getToken.data["code"]) {
+      print("token未过期");
+      Navigator.pushNamed(context, '/home');
+    } else {
+      sp.remove("token");
+    }
+    print(getToken.data);
   }
+
+  ////加载动画
+  // void _showLoadingAnimation() {
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (BuildContext context) {
+  //       return Dialog(
+  //         child: LoadingIndicator(
+  //           indicatorType: Indicator.pacman,
+  //           color: Colors.orange,
+  //         ),
+  //         backgroundColor: Colors.transparent,
+  //         insetPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+  //         elevation: 0,
+  //       );
+  //     },
+  //   );
+  // }
 }
