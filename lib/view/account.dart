@@ -44,7 +44,7 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     contentPadding: EdgeInsets.only(left: 10, top: 30),
                     title: Text(
-                      Global.getInstance()!.user![0].toString(),
+                      Global.getInstance()!.user!["username"],
                       style: TextStyle(fontSize: 30, height: 1.8),
                     ),
                     minVerticalPadding: -10,
@@ -57,8 +57,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(top: 20, bottom: 5, left: 20, right: 10),
+              padding: EdgeInsets.only(top: 20, bottom: 5, left: 20, right: 10),
               child: ListTile(
                 leading: Icon(
                   Icons.favorite,
@@ -66,12 +65,11 @@ class _AccountPageState extends State<AccountPage> {
                   size: 30,
                 ),
                 title: Text('我的喜欢', style: TextStyle(fontSize: 20)),
-                onTap: (){},
+                onTap: () {},
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(top: 5, bottom: 10, left: 20, right: 10),
+              padding: EdgeInsets.only(top: 5, bottom: 10, left: 20, right: 10),
               child: ListTile(
                 leading: Icon(
                   Icons.comment,
@@ -79,7 +77,7 @@ class _AccountPageState extends State<AccountPage> {
                   size: 30,
                 ),
                 title: Text('我的评论', style: TextStyle(fontSize: 20)),
-                onTap: (){},
+                onTap: () {},
               ),
             ),
           ],

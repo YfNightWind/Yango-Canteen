@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yangocanteen/global/Global.dart';
+import 'package:yangocanteen/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -145,10 +146,10 @@ class _LoginPageState extends State<LoginPage> {
     print(result);
     if (result.data["code"]) {
       Global.getInstance()!.token = result.data["token"];
-      Global.getInstance()!.user = result.data["result"][0];
+      Global.getInstance()!.user = result.data["result"];
       sp.setString("token", result.data["token"]);
-      sp.setString("user", result.data["result"][0]["username"]);
-      Navigator.pushNamed(context, '/home');
+      sp.setString("username", result.data["result"]["username"]);
+      Navigator.popAndPushNamed(context, '/home');
     } else {
       print("shit");
     }
@@ -158,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
   Future verifyToken() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     String? token = sp.getString("token");
-    String? user = sp.getString("user");
+    String? user = sp.getString("username");
     if (token != null) {
       Global.getInstance()!.token = token;
     }
@@ -171,29 +172,10 @@ class _LoginPageState extends State<LoginPage> {
     );
     if (getToken.data["code"]) {
       print("token未过期");
-      Navigator.pushNamed(context, '/home');
+      Navigator.popAndPushNamed(context, '/home');
     } else {
       sp.remove("token");
     }
     print(getToken.data);
   }
-
-  ////加载动画
-  // void _showLoadingAnimation() {
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (BuildContext context) {
-  //       return Dialog(
-  //         child: LoadingIndicator(
-  //           indicatorType: Indicator.pacman,
-  //           color: Colors.orange,
-  //         ),
-  //         backgroundColor: Colors.transparent,
-  //         insetPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-  //         elevation: 0,
-  //       );
-  //     },
-  //   );
-  // }
 }

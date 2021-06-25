@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class Global {
   static Global? _instance;
   late Dio dio;
-  Map ?user;
+  Map? user;
   late String token;
 
   //构造方法
@@ -17,21 +17,24 @@ class Global {
     dio = new Dio();
     dio.options = BaseOptions(
       baseUrl: 'http://114.215.209.136:5050/',
-      connectTimeout: 10000,
-      receiveTimeout: 10000,
-      sendTimeout: 10000,
+      connectTimeout: 1000,
+      receiveTimeout: 1000,
+      sendTimeout: 1000,
       contentType: Headers.jsonContentType,
       responseType: ResponseType.json,
     );
     //dio的监听事件
-    dio.interceptors.add(InterceptorsWrapper(
+    dio.interceptors.add(
+      InterceptorsWrapper(
         //"n" means nothing
         onError: (DioError e, n) {
-      if (e.type == DioErrorType.connectTimeout) {
-        print("连接超时");
-      } else {
-        print(e.error.toString());
-      }
-    }));
+          if (e.type == DioErrorType.connectTimeout) {
+            print("连接超时");
+          } else {
+            print(e.error.toString());
+          }
+        },
+      ),
+    );
   }
 }
