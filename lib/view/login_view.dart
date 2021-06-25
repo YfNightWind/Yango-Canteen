@@ -22,11 +22,11 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _login();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   _login();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +145,7 @@ class _LoginPageState extends State<LoginPage> {
       Global.getInstance()!.user = result.data["result"];
       sp.setString("token", result.data["token"]);
       sp.setString("username", result.data["result"]["username"]);
+      sp.setStringList("user", result.data["result"]);
       Navigator.popAndPushNamed(context, '/home');
     } else {
       print("shit");
@@ -155,23 +156,31 @@ class _LoginPageState extends State<LoginPage> {
   Future verifyToken() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     String? token = sp.getString("token");
-    String? user = sp.getString("username");
-    if (token != null) {
-      Global.getInstance()!.token = token;
-    }
+    String? username = sp.getString("username");
     var getToken = await Global.getInstance()!.dio.post(
       '/user/token',
       data: {
-        "username": user,
+        "username": username,
         "token": token,
       },
     );
-    if (getToken.data["code"]) {
-      print("token未过期");
-      Navigator.popAndPushNamed(context, '/home');
+    if (token != null) {
+      // Global.getInstance()!.token = token;
+      Global.getInstance()!.token = token;
+      Global.getInstance()!.username = username!;
+      if (getToken.data["code"]) {
+        print("token未过期");
+        // sp.setString("token", getToken.data["token"]); //null
+        // sp.setString("username", getToken.data["result"]["username"]);
+        Global.getInstance()!.token = token;
+        Global.getInstance()!.username = username;
+        Navigator.popAndPushNamed(context, '/home');
+      } else {
+        sp.remove("token");
+      }
     } else {
-      sp.remove("token");
+      getToken.data["token"] = sp.getString("token");
+      getToken.data["result"]["username"] = sp.getString("username");
     }
-    print(getToken.data);
   }
 }

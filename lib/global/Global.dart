@@ -5,6 +5,7 @@ class Global {
   late Dio dio;
   Map? user;
   late String token;
+  late String username;
 
   //构造方法
   static Global? getInstance() {
