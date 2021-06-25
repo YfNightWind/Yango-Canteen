@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yangocanteen/global/Global.dart';
-import 'package:yangocanteen/main.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -21,14 +19,12 @@ class _LoginPageState extends State<LoginPage> {
     _user = new TextEditingController();
     _password = new TextEditingController();
     verifyToken();
-    _login();
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
-    verifyToken();
     _login();
   }
 
