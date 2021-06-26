@@ -41,8 +41,14 @@ class FeedBackFormState extends State<FeedBackForm> {
   @override
   Widget build(BuildContext context) {
     void sendInfo() async {
-      await Global.getInstance()!.dio.post('/feedback/commit',
-          data: {'contact': contact.text, 'feedback': details.text});
+      await Global.getInstance()!.dio.post(
+        '/feedback/commit',
+        data: {
+          'username': Global.getInstance()!.username,
+          'contact': contact.text,
+          'feedback': details.text,
+        },
+      );
     }
 
     return Form(

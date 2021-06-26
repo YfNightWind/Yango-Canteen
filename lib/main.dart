@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:yangocanteen/routes/routes.dart';
-
-// final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
-final GlobalKey navigatorKey = new GlobalKey();
 void main() {
   runApp(MyApp());
 }
