@@ -94,7 +94,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 if (passValue == null || passValue.isEmpty) {
                   return '密码不得为空哦';
                 }
-                if (5 < passValue.length || passValue.length > 15) {
+                if (5 > passValue.length || passValue.length > 15) {
                   return '密码在5~20位哦';
                 }
                 return null;
