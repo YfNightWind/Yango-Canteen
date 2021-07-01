@@ -22,12 +22,6 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _login();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,11 +139,13 @@ class _LoginPageState extends State<LoginPage> {
       Global.getInstance()!.user = result.data["result"];
       sp.setString("token", result.data["token"]);
       sp.setString("username", result.data["result"]["username"]);
-      sp.setStringList("user", result.data["result"]);
       Navigator.popAndPushNamed(context, '/home');
     } else {
       print("shit");
     }
+    // result.data["token"] = sp.getString("token");
+    // result.data["result"]["username"] = sp.getString("username");
+    verifyToken();
   }
 
   //验证token
@@ -165,7 +161,6 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
     if (token != null) {
-      // Global.getInstance()!.token = token;
       Global.getInstance()!.token = token;
       Global.getInstance()!.username = username!;
       if (getToken.data["code"]) {
@@ -178,9 +173,17 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         sp.remove("token");
       }
-    } else {
-      getToken.data["token"] = sp.getString("token");
-      getToken.data["result"]["username"] = sp.getString("username");
     }
+    // else {
+    //   getToken.data["token"] = sp.getString("token");
+    //   getToken.data["result"]["username"] = sp.getString("username"); //?
+    //   dispose();
+    // }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _login();
   }
 }

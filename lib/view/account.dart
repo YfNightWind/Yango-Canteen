@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yangocanteen/global/Global.dart';
 
 class AccountPage extends StatefulWidget {
@@ -10,6 +11,13 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  var getusername;
+  @override
+  void initState() {
+    super.initState();
+    getusername = Global.getInstance()!.username;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +52,7 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     contentPadding: EdgeInsets.only(left: 10, top: 30),
                     title: Text(
-                      Global.getInstance()!.username,
+                      getusername,
                       style: TextStyle(fontSize: 30, height: 1.8),
                     ),
                     minVerticalPadding: -10,
@@ -54,6 +62,17 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                   ),
                 ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20, bottom: 5, left: 20, right: 10),
+              child: ElevatedButton(
+                child: Text('注销'),
+                onPressed: () async {
+                  SharedPreferences sp = await SharedPreferences.getInstance();
+                  sp.remove("token");
+                  Navigator.popAndPushNamed(context, '/');
+                },
               ),
             ),
             Padding(
