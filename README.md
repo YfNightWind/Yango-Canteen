@@ -4,6 +4,8 @@
 和舍友一起合作开发的一款应用
 使用纯Flutter开发，后端使用node.js开发，同时也有微信小程序端，目前也正在开发中
 
+#### [后端链接](https://github.com/280code/schoolFood) 欢迎大家点个star
+
 ##### APK下载地址
 [百度网盘链接](https://pan.baidu.com/s/1yoRds1hesrjKTApkBfyw9Q) 提取码：naj1 
 
