@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yangocanteen/global/Global.dart';
+import 'package:yangocanteen/main.dart';
+
+var context = navigatorState.currentContext;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -139,12 +142,16 @@ class _LoginPageState extends State<LoginPage> {
       Global.getInstance()!.user = result.data["result"];
       sp.setString("token", result.data["token"]);
       sp.setString("username", result.data["result"]["username"]);
-      Navigator.popAndPushNamed(context, '/home');
-    } else {
-      print("shit");
+      Navigator.popAndPushNamed(context!, '/home');
     }
-    // result.data["token"] = sp.getString("token");
-    // result.data["result"]["username"] = sp.getString("username");
+    if ((result.data["code"])==false) {
+      ScaffoldMessenger.of(context!).showSnackBar(
+        SnackBar(
+          content: Text('用户名或密码错误！'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
     verifyToken();
   }
 
@@ -165,25 +172,13 @@ class _LoginPageState extends State<LoginPage> {
       Global.getInstance()!.username = username!;
       if (getToken.data["code"]) {
         print("token未过期");
-        // sp.setString("token", getToken.data["token"]); //null
-        // sp.setString("username", getToken.data["result"]["username"]);
         Global.getInstance()!.token = token;
         Global.getInstance()!.username = username;
-        Navigator.popAndPushNamed(context, '/home');
+        Navigator.popAndPushNamed(context!, '/home');
       } else {
         sp.remove("token");
       }
     }
-    // else {
-    //   getToken.data["token"] = sp.getString("token");
-    //   getToken.data["result"]["username"] = sp.getString("username"); //?
-    //   dispose();
-    // }
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _login();
-  }
 }

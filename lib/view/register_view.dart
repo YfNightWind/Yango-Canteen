@@ -169,8 +169,11 @@ class _RegisterFormState extends State<RegisterForm> {
                         elevation: MaterialStateProperty.all(10)),
                     onPressed: () {
                       if (Form.of(context)!.validate()) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text('注册成功！')));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('注册成功！'),
+                          ),
+                        );
                         submitInfo();
                         Navigator.pop(context);
                       }

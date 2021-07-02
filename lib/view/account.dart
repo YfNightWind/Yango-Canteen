@@ -65,7 +65,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 5, left: 20, right: 10),
+              padding: EdgeInsets.only(top: 20, bottom: 5, left: 30, right: 10),
               child: ElevatedButton(
                 child: Text('注销'),
                 onPressed: () async {
