@@ -65,8 +65,12 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 5, left: 30, right: 10),
+              padding: EdgeInsets.only(top: 5, bottom: 5, left: 350, right: 0),
               child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.red),
+                  elevation: MaterialStateProperty.all(10)
+                ),
                 child: Text('注销'),
                 onPressed: () async {
                   SharedPreferences sp = await SharedPreferences.getInstance();
