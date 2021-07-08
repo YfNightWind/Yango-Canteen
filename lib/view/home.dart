@@ -53,17 +53,20 @@ class _HomePageState extends State<HomePage> {
               height: 30,
             ),
             Card(
-                elevation: 10,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: Container(
-                  height: 150,
-                  width: 400,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(20),
-                  child: Text('这里显示的是最受欢迎的店铺，下一个版本更新',
-                      style: TextStyle(fontSize: 25)),
-                ))
+              elevation: 10,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Container(
+                height: 150,
+                width: 400,
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  '这里显示的是最受欢迎的店铺，下一个版本更新',
+                  style: TextStyle(fontSize: 25),
+                ),
+              ),
+            )
           ],
         ),
       ),

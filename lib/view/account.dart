@@ -53,7 +53,7 @@ class _AccountPageState extends State<AccountPage> {
                     contentPadding: EdgeInsets.only(left: 10, top: 30),
                     title: Text(
                       getusername,
-                      style: TextStyle(fontSize: 30, height: 1.8),
+                      style: TextStyle(fontSize: 26, height: 1.8),
                     ),
                     minVerticalPadding: -10,
                     subtitle: Text(
@@ -65,7 +65,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 5, left: 350, right: 0),
+              padding: EdgeInsets.only(top: 5, bottom: 5, left: 340, right: 0),
               child: ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.red),

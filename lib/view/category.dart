@@ -42,7 +42,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 width: 350,
                 margin: EdgeInsets.all(10),
                 child: Text(
-                  '按菜品查找',
+                  '失物招领',
                   style: TextStyle(fontSize: 40, color: Colors.white),
                 ),
               ),

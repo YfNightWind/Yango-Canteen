@@ -28,13 +28,16 @@ class _TabsPageState extends State<TabsPage> {
           borderRadius: BorderRadius.circular(50),
         ),
         child: FloatingActionButton(
-          child: Icon(this._currentIndex == 1 ? Icons.category : Icons.category_outlined),
+          child: Icon(this._currentIndex == 1
+              ? Icons.category
+              : Icons.category_outlined),
           onPressed: () {
             setState(() {
               this._currentIndex = 1;
             });
           },
-          backgroundColor: this._currentIndex == 1 ? Colors.orange : Colors.amber.shade300,
+          backgroundColor:
+              this._currentIndex == 1 ? Colors.orange : Colors.amber.shade300,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -51,14 +54,22 @@ class _TabsPageState extends State<TabsPage> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(this._currentIndex == 0 ? Icons.food_bank : Icons.food_bank_outlined),
-              label: ("首页")),
+            icon: Icon(this._currentIndex == 0
+                ? Icons.food_bank
+                : Icons.food_bank_outlined),
+            label: ("首页"),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(this._currentIndex == 1 ? Icons.category : Icons.category_outlined),
-              label: ("分类")),
+            icon: Icon(this._currentIndex == 1
+                ? Icons.category
+                : Icons.category_outlined),
+            label: ("分类"),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(this._currentIndex == 2 ? Icons.person : Icons.person_outlined),
-              label: ("个人中心"))
+            icon: Icon(
+                this._currentIndex == 2 ? Icons.person : Icons.person_outlined),
+            label: ("个人中心"),
+          )
         ],
       ),
     );
