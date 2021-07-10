@@ -42,7 +42,8 @@ class _AccountPageState extends State<AccountPage> {
                 elevation: 10,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                margin: EdgeInsets.all(20),
+                margin:
+                    EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
                 child: Container(
                   width: 400,
                   height: 150,
@@ -68,9 +69,8 @@ class _AccountPageState extends State<AccountPage> {
               padding: EdgeInsets.only(top: 5, bottom: 5, left: 340, right: 0),
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.red),
-                  elevation: MaterialStateProperty.all(10)
-                ),
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    elevation: MaterialStateProperty.all(10)),
                 child: Text('注销'),
                 onPressed: () async {
                   SharedPreferences sp = await SharedPreferences.getInstance();

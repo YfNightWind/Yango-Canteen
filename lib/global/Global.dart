@@ -39,3 +39,7 @@ class Global {
     );
   }
 }
+//楼层tab的index
+class GetTabIndex {
+  static int getTabIndex = 0;
+}
