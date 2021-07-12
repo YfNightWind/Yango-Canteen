@@ -35,7 +35,7 @@ class _FloorTwoState extends State<FloorTwo> {
     print(showRestaurant);
   }
 
-  showMenuDetails() async {
+  Future showMenuDetails() async {
     var name = await Global.getInstance()!.dio.post(
       '/menu/getall/name',
       data: {"restaurant": temp},
@@ -57,6 +57,50 @@ class _FloorTwoState extends State<FloorTwo> {
     }
   }
 
+  Future<Widget> showListData() async {
+    return ListView.separated(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: showRestaurant!.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(showRestaurant![index]["name"]),
+          onTap: () {
+            setState(() {
+              temp = showRestaurant![index]["name"].toString();
+              print(temp);
+            });
+          },
+        );
+      },
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.black,
+        height: 1.5,
+      ),
+    );
+  }
+
+  Widget showDetailData(BuildContext context, AsyncSnapshot snapshot) {
+    return ListView.builder(
+      itemCount: showMenuName!.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+          margin: EdgeInsets.only(top: 10, left: 5),
+          child: ListTile(
+            title: Text(showMenuName![index]["name"]),
+            subtitle: Text(showMenuPrice![index]["price"] + "元"),
+            onTap: () {},
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,25 +116,19 @@ class _FloorTwoState extends State<FloorTwo> {
                 Container(
                   width: 120,
                   height: 690,
-                  child: ListView.separated(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: showRestaurant!.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(showRestaurant![index]["name"]),
-                        onTap: () {
-                          setState(() {
-                            temp = showRestaurant![index]["name"].toString();
-                            print(temp);
-                          });
-                        },
-                      );
+                  child: FutureBuilder(
+                    future: getRestaurant(),
+                    //BUG NEED TO BE FIXED!
+                    initialData: CupertinoActivityIndicator(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        return snapshot.data;
+                      } else if (snapshot.hasError) {
+                        return CupertinoActivityIndicator();
+                      } else {
+                        return snapshot.data;
+                      }
                     },
-                    separatorBuilder: (context, index) => Divider(
-                      color: Colors.black,
-                      height: 1.5,
-                    ),
                   ),
                 ),
                 Container(
@@ -99,23 +137,19 @@ class _FloorTwoState extends State<FloorTwo> {
                   child: FutureBuilder(
                     future: showMenuDetails(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      return ListView.builder(
-                        itemCount: showMenuName!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            margin: EdgeInsets.only(top: 10, left: 5),
-                            child: ListTile(
-                              title: Text(showMenuName![index]["name"]),
-                              subtitle:
-                                  Text(showMenuPrice![index]["price"] + "元"),
-                              onTap: () {},
-                            ),
-                          );
-                        },
-                      );
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return new Text('点击左列任何一个开始');
+                        case ConnectionState.waiting:
+                          return CupertinoActivityIndicator();
+                        case ConnectionState.active:
+                        case ConnectionState.done:
+                          if (snapshot.hasError) {
+                            return Text('错误${snapshot.error}');
+                          } else {
+                            return showDetailData(context, snapshot);
+                          }
+                      }
                     },
                   ),
                 )
