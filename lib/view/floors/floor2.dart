@@ -80,27 +80,6 @@ class _FloorTwoState extends State<FloorTwo> {
     );
   }
 
-  Widget showDetailData(BuildContext context, AsyncSnapshot snapshot) {
-    return ListView.builder(
-      itemCount: showMenuName!.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(20),
-            ),
-          ),
-          margin: EdgeInsets.only(top: 10, left: 5),
-          child: ListTile(
-            title: Text(showMenuName![index]["name"]),
-            subtitle: Text(showMenuPrice![index]["price"] + "元"),
-            onTap: () {},
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,9 +95,8 @@ class _FloorTwoState extends State<FloorTwo> {
                 Container(
                   width: 120,
                   height: 690,
-                  child: FutureBuilder(
-                    future: getRestaurant(),
-                    //BUG NEED TO BE FIXED!
+                  child: FutureBuilder<Widget>(
+                    future: showListData(),
                     initialData: CupertinoActivityIndicator(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
@@ -139,16 +117,37 @@ class _FloorTwoState extends State<FloorTwo> {
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
-                          return new Text('点击左列任何一个开始');
                         case ConnectionState.waiting:
-                          return CupertinoActivityIndicator();
+                          // return Container(
+                          //   width: 50,
+                          //   height: 50,
+                          //   child: Center(
+                          //     child: CircularProgressIndicator(),
+                          //   ),
+                          // );
                         case ConnectionState.active:
                         case ConnectionState.done:
-                          if (snapshot.hasError) {
-                            return Text('错误${snapshot.error}');
-                          } else {
-                            return showDetailData(context, snapshot);
-                          }
+                          return ListView.builder(
+                            itemCount: showMenuName!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                margin: EdgeInsets.only(top: 10, left: 5),
+                                child: ListTile(
+                                  title: Text(showMenuName![index]["name"]),
+                                  subtitle: Text(
+                                      showMenuPrice![index]["price"] + "元"),
+                                  onTap: () {},
+                                ),
+                              );
+                            },
+                          );
+                        default:
+                          return Center(
+                            child: Text('请求失败'),
+                          );
                       }
                     },
                   ),
