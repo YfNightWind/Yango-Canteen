@@ -45,6 +45,11 @@ dependencies:
   shared_preferences: ^2.0.6
   #加载动画
   flutter_easyloading: ^3.0.0
+  #图片选择
+  image_picker: ^0.8.1+4
+  #视频选择
+  video_player: ^2.1.10
+  
   
 dev_dependencies:
   flutter_test:

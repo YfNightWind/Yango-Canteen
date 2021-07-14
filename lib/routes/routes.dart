@@ -14,6 +14,6 @@ Map<String, WidgetBuilder> routes = {
   "/feedback": (BuildContext context) => FeedBackPage(),
   "/home": (BuildContext context) => TabsPage(),
   "/register": (BuildContext context) => RegisterPage(),
-  "/": (BuildContext context) => ShowMenuPage(),
-  "/lostandfound":(BuildContext context)=> LostAndFoundPage()
+  "/menu": (BuildContext context) => ShowMenuPage(),
+  "/":(BuildContext context)=> LostAndFoundPage()
 };
