@@ -12,7 +12,7 @@ class LostAndFoundPage extends StatefulWidget {
 class _LostAndFoundPageState extends State<LostAndFoundPage> {
   //从相机中选择
   final ImagePicker _picker = ImagePicker();
-  var _image;
+  var _image;//
   Future _getImage() async {
     var image = await _picker.getImage(source: ImageSource.gallery);
     setState(() {
