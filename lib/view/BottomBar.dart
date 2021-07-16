@@ -8,7 +8,6 @@ class TabsPage extends StatefulWidget {
   const TabsPage({
     Key? key,
   }) : super(key: key);
-
   @override
   _TabsPageState createState() => _TabsPageState();
 }
