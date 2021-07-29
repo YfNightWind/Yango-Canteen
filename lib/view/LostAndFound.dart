@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,37 +11,34 @@ class LostAndFoundPage extends StatefulWidget {
 }
 
 class _LostAndFoundPageState extends State<LostAndFoundPage> {
-  //从相机中选择
-  final ImagePicker _picker = ImagePicker();
-  var _image;//
-  Future _getImage() async {
-    var image = await _picker.getImage(source: ImageSource.gallery);
+  File? _imageFile;
+  final picker = ImagePicker();
+  Future chooseImage() async {
+    final getImage = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      _image = image;
+      if (getImage != null) {
+        _imageFile = File(getImage.path);
+      } else {
+        print('no image selected');
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('失物招领'),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Container(
-            height: 200,
-            width: 200,
-            child: ElevatedButton(
-              child: Text("从相册中选择"),
-              onPressed: () => _getImage(),
-            ),
-          ),
-          Container(
-          )
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: Text('失物招领'),
+          centerTitle: true,
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.camera),
+          onPressed: () => chooseImage(),
+        ),
+        body: _imageFile != null
+            ? Center(
+                child: Image.file(_imageFile!),
+              )
+            : Center());
   }
 }

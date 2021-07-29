@@ -155,7 +155,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.1+4"
+    version: "0.8.2"
   image_picker_for_web:
     dependency: transitive
     description:

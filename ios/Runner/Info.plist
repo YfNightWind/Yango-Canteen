@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>校园食堂失物招领，需要使用相册里的照片进行上传，方便用户识别丢失物品</string>
+	<key>NSCameraUsageDescription</key>
+	<string>校园食堂失物招领，需要使用相机拍摄的照片进行上传，方便用户识别丢失物品</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
