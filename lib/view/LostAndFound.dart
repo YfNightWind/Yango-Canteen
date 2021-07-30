@@ -23,7 +23,7 @@ class _LostAndFoundPageState extends State<LostAndFoundPage> {
       }
     });
   }
-
+  //iOS照片无法显示，Android可以
   @override
   Widget build(BuildContext context) {
     return Scaffold(
