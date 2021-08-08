@@ -114,41 +114,26 @@ class _FloorTwoState extends State<FloorTwo> {
                   width: 285,
                   child: FutureBuilder(
                     future: showMenuDetails(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                        case ConnectionState.waiting:
-                          // return Container(
-                          //   width: 50,
-                          //   height: 50,
-                          //   child: Center(
-                          //     child: CircularProgressIndicator(),
-                          //   ),
-                          // );
-                        case ConnectionState.active:
-                        case ConnectionState.done:
-                          return ListView.builder(
-                            itemCount: showMenuName!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                                margin: EdgeInsets.only(top: 10, left: 5),
-                                child: ListTile(
-                                  title: Text(showMenuName![index]["name"]),
-                                  subtitle: Text(
-                                      showMenuPrice![index]["price"] + "元"),
-                                  onTap: () {},
-                                ),
-                              );
-                            },
-                          );
-                        default:
-                          return Center(
-                            child: Text('请求失败'),
-                          );
-                      }
+                    builder: (context, snapshot) {
+                      return snapshot.connectionState == ConnectionState.waiting
+                          ? ListView.builder(
+                              itemCount: showMenuName!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  margin: EdgeInsets.only(top: 10, left: 5),
+                                  child: ListTile(
+                                    title: Text(showMenuName![index]["name"]),
+                                    subtitle: Text(
+                                        showMenuPrice![index]["price"] + "元"),
+                                    onTap: () {},
+                                  ),
+                                );
+                              },
+                            )
+                          : CircularProgressIndicator();
                     },
                   ),
                 )

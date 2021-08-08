@@ -32,8 +32,7 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
           GestureDetector(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('该功能暂未完成，敬请期待')));
+              Navigator.pushNamed(context, '/lostandfound');
             },
             child: Card(
               child: Container(
