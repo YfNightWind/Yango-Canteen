@@ -66,7 +66,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 5, left: 340, right: 0),
+              padding: EdgeInsets.only(top: 5, bottom: 5, left: 300, right: 0),
               child: ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red),
