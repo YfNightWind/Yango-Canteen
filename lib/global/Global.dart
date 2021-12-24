@@ -5,7 +5,7 @@ class Global {
   late Dio dio;
   Map? user;
   late String token;
-  late String username;
+  String? username;
 
   //构造方法
   static Global? getInstance() {
@@ -21,7 +21,7 @@ class Global {
       connectTimeout: 1000,
       receiveTimeout: 1000,
       sendTimeout: 1000,
-      contentType: Headers.jsonContentType,
+      contentType: Headers.formUrlEncodedContentType,
       responseType: ResponseType.json,
     );
     //dio的监听事件
