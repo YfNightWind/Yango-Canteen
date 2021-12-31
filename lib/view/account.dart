@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yangocanteen/global/Global.dart';
 
@@ -11,12 +10,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  var getusername;
-  @override
-  void initState() {
-    super.initState();
-    getusername = Global.getInstance()!.username;
-  }
+  late var getusername = Global.getInstance()!.username;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +35,10 @@ class _AccountPageState extends State<AccountPage> {
               child: Card(
                 elevation: 10,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
                 margin:
                     EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
                 child: Container(
@@ -53,7 +50,7 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     contentPadding: EdgeInsets.only(left: 10, top: 30),
                     title: Text(
-                      getusername,
+                      '${getusername}',
                       style: TextStyle(fontSize: 26, height: 1.8),
                     ),
                     minVerticalPadding: -10,
@@ -87,7 +84,10 @@ class _AccountPageState extends State<AccountPage> {
                   color: Colors.red,
                   size: 30,
                 ),
-                title: Text('我的喜欢', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  '我的喜欢',
+                  style: TextStyle(fontSize: 20),
+                ),
                 onTap: () {},
               ),
             ),

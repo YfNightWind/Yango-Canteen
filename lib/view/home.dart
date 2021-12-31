@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 
 class HomePage extends StatefulWidget {
