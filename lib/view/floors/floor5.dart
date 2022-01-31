@@ -21,7 +21,7 @@ class _FloorFiveState extends State<FloorFive> {
   @override
   void initState() {
     getRestaurant();
-    showMenuDetails();
+    // showMenuDetails();
     super.initState();
   }
 
@@ -30,31 +30,54 @@ class _FloorFiveState extends State<FloorFive> {
       "floor": 5,
     });
     setState(() {
-      showRestaurant = result.data["result"];
+      showRestaurant = result.data["data"];
     });
     print(showRestaurant);
   }
 
-  showMenuDetails() async {
+  Future showMenuDetails() async {
     var name = await Global.getInstance()!.dio.post(
-      '/menu/getall/name',
+      '/menu/getMenuName',
       data: {"restaurant": temp},
     );
     var price = await Global.getInstance()!.dio.post(
-      '/menu/getall/price',
+      '/menu/getMenuPrice',
       data: {"restaurant": temp},
     );
     var category = await Global.getInstance()!.dio.post(
-      '/menu/getall/category',
+      '/menu/getMenuCategory',
       data: {"restaurant": temp},
     );
     if (this.mounted) {
       setState(() {
-        showMenuName = name.data["result"];
-        showMenuPrice = price.data["result"];
-        showMenucategory = category.data["result"];
+        showMenuName = name.data["data"];
+        showMenuPrice = price.data["data"];
+        showMenucategory = category.data["data"];
       });
     }
+  }
+
+  Future<Widget> showListData() async {
+    return ListView.separated(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: showRestaurant!.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(showRestaurant![index]["name"]),
+          onTap: () {
+            setState(() {
+              temp = showRestaurant![index]["name"].toString();
+              print(temp);
+            });
+          },
+        );
+      },
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.black,
+        height: 1.5,
+      ),
+    );
   }
 
   @override
@@ -72,50 +95,54 @@ class _FloorFiveState extends State<FloorFive> {
                 Container(
                   width: 120,
                   height: 690,
-                  child: ListView.separated(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: showRestaurant!.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(showRestaurant![index]["name"]),
-                        onTap: () {
-                          setState(() {
-                            temp = showRestaurant![index]["name"].toString();
-                            print(temp);
-                          });
-                        },
-                      );
+                  child: FutureBuilder<Widget>(
+                    future: showListData(),
+                    initialData: CupertinoActivityIndicator(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        return snapshot.data;
+                      } else if (snapshot.hasError) {
+                        return CupertinoActivityIndicator();
+                      } else {
+                        return snapshot.data;
+                      }
                     },
-                    separatorBuilder: (context, index) => Divider(
-                      color: Colors.black,
-                      height: 1.5,
-                    ),
                   ),
                 ),
                 Container(
                   height: 690,
-                  width: 285,
+                  width: 260,
                   child: FutureBuilder(
                     future: showMenuDetails(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      return ListView.builder(
-                        itemCount: showMenuName!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            margin: EdgeInsets.only(top: 10, left: 5),
-                            child: ListTile(
-                              title: Text(showMenuName![index]["name"]),
-                              subtitle:
-                                  Text(showMenuPrice![index]["price"] + "元"),
-                              onTap: () {},
-                            ),
-                          );
-                        },
-                      );
+                    builder: (context, snapshot) {
+                      return snapshot.connectionState == ConnectionState.waiting
+                          ? ListView.builder(
+                              itemCount: showMenuName!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  margin: EdgeInsets.only(top: 10, left: 5),
+                                  child: ListTile(
+                                    title: Text(
+                                      showMenuName![index].toString(),
+                                    ),
+                                    subtitle: Text(
+                                        showMenuPrice![index].toString() + "元"),
+                                    onTap: () {},
+                                  ),
+                                );
+                              },
+                            )
+                          : new Text(
+                              "点击任何一个店铺查看菜品",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
                     },
                   ),
                 )

@@ -14,14 +14,18 @@ class _FloorTwoState extends State<FloorTwo> {
   List? showRestaurant;
   List? showMenuName;
   List? showMenuPrice;
-  List? showMenucategory;
+  List? showMenuCategory;
+  List? showFirstMenuName;
+  List? showFirstMenuPrice;
+  List? showFirstMenuCategory;
   var temp; //用于获取点击列表后的店名，以此来渲染右边的数据的请求
   var restaurantName;
 
   @override
   void initState() {
     getRestaurant();
-    showMenuDetails();
+    getFirstItem();
+    // showMenuDetails();
     super.initState();
   }
 
@@ -30,31 +34,106 @@ class _FloorTwoState extends State<FloorTwo> {
       "floor": 2,
     });
     setState(() {
-      showRestaurant = result.data["result"];
+      showRestaurant = result.data["data"];
     });
     print(showRestaurant);
   }
 
   Future showMenuDetails() async {
     var name = await Global.getInstance()!.dio.post(
-      '/menu/getall/name',
+      '/menu/getMenuName',
       data: {"restaurant": temp},
     );
     var price = await Global.getInstance()!.dio.post(
-      '/menu/getall/price',
+      '/menu/getMenuPrice',
       data: {"restaurant": temp},
     );
     var category = await Global.getInstance()!.dio.post(
-      '/menu/getall/category',
+      '/menu/getMenuCategory',
       data: {"restaurant": temp},
     );
-    if (this.mounted) {
+    // if (this.mounted) {
       setState(() {
-        showMenuName = name.data["result"];
-        showMenuPrice = price.data["result"];
-        showMenucategory = category.data["result"];
+        showMenuName = name.data["data"];
+        showMenuPrice = price.data["data"];
+        showMenuCategory = category.data["data"];
       });
-    }
+    // }
+  }
+
+  Future getFirstItem() async {
+    var restaurant =
+        await Global.getInstance()!.dio.post('/restaurant/get', data: {
+      "floor": 2,
+    });
+    var firstRestaurant = restaurant.data["data"][0]["name"];
+    print("第一个餐厅:" + firstRestaurant);
+    var firstItemName = await Global.getInstance()!.dio.post(
+      '/menu/getMenuName',
+      data: {"restaurant": firstRestaurant},
+    );
+    var firstItemPrice = await Global.getInstance()!.dio.post(
+      '/menu/getMenuPrice',
+      data: {"restaurant": firstRestaurant},
+    );
+    var firstItemCategory = await Global.getInstance()!.dio.post(
+      '/menu/getMenuCategory',
+      data: {"restaurant": firstRestaurant},
+    );
+
+    // if (this.mounted) {
+      setState(() {
+        showMenuName = firstItemName.data["data"];
+        showMenuPrice = firstItemPrice.data["data"];
+        showMenuCategory = firstItemCategory.data["data"];
+      });
+    // }
+  }
+
+  Future<Widget> showMenuDetails2() async {
+    return ListView.builder(
+      itemCount: showMenuName!.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+          margin: EdgeInsets.only(top: 10, left: 5),
+          child: ListTile(
+            title: Text(
+              showMenuName![index].toString(),
+            ),
+            subtitle: Text(showMenuPrice![index].toString() + "元"),
+            onTap: () {},
+          ),
+        );
+      },
+    );
+  }
+
+  Future<Widget> showMenuDetails3() async {
+    return ListView.builder(
+      itemCount: showMenuName!.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+          margin: EdgeInsets.only(top: 10, left: 5),
+          child: ListTile(
+            title: Text(
+              showFirstMenuName![index].toString(),
+            ),
+            subtitle: Text(showFirstMenuPrice![index].toString() + "元"),
+            onTap: () {},
+          ),
+        );
+      },
+    );
   }
 
   Future<Widget> showListData() async {
@@ -111,30 +190,46 @@ class _FloorTwoState extends State<FloorTwo> {
                 ),
                 Container(
                   height: 690,
-                  width: 285,
-                  child: FutureBuilder(
-                    future: showMenuDetails(),
-                    builder: (context, snapshot) {
-                      return snapshot.connectionState == ConnectionState.waiting
-                          ? ListView.builder(
-                              itemCount: showMenuName!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Card(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  margin: EdgeInsets.only(top: 10, left: 5),
-                                  child: ListTile(
-                                    title: Text(showMenuName![index]["name"]),
-                                    subtitle: Text(
-                                        showMenuPrice![index]["price"] + "元"),
-                                    onTap: () {},
-                                  ),
-                                );
-                              },
-                            )
-                          : CircularProgressIndicator();
+                  width: 260,
+                  child: FutureBuilder<Widget>(
+                    future: showMenuDetails2(),
+                    // initialData: showMenuDetails(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        return snapshot.data;
+                      } else if (snapshot.hasError) {
+                        return CupertinoActivityIndicator();
+                      } else {
+                        return snapshot.data;
+                      }
                     },
+                    // future: showMenuDetails(),
+                    // initialData: getFirstItem(),
+                    // builder: (context, snapshot) {
+                    //   return snapshot.connectionState == ConnectionState.none
+                    //       ? CupertinoActivityIndicator()
+                    //       : ListView.builder(
+                    //           itemCount: showMenuName!.length,
+                    //           itemBuilder: (BuildContext context, int index) {
+                    //             return Card(
+                    //               shape: RoundedRectangleBorder(
+                    //                 borderRadius: BorderRadius.all(
+                    //                   Radius.circular(20),
+                    //                 ),
+                    //               ),
+                    //               margin: EdgeInsets.only(top: 10, left: 5),
+                    //               child: ListTile(
+                    //                 title: Text(
+                    //                   showMenuName![index].toString(),
+                    //                 ),
+                    //                 subtitle: Text(
+                    //                     showMenuPrice![index].toString() + "元"),
+                    //                 onTap: () {},
+                    //               ),
+                    //             );
+                    //           },
+                    //         );
+                    // },
                   ),
                 )
               ],
